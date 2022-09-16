@@ -1,8 +1,8 @@
 <template>
   <section class="todoapp">
     <TodoHeader @create="createTodo"></TodoHeader>
-    <TodoMain :arr="list" @del="delTodo"></TodoMain>
-    <TodoFooter :arr="list"></TodoFooter>
+    <TodoMain :arr="filteredList" @del="delTodo"></TodoMain>
+    <TodoFooter :arr="filteredList" @filter="filterTodo"></TodoFooter>
   </section>
 </template>
 
@@ -26,7 +26,8 @@ export default {
         { id: 100, name: 'LearnReact', isDone: true },
         { id: 201, name: 'LearnVue', isDone: false },
         { id: 103, name: 'LearnTS', isDone: true }
-      ]
+      ],
+      getFilter: 'all'
     }
   },
   methods: {
@@ -37,6 +38,20 @@ export default {
     },
     delTodo (id) {
       this.list = this.list.filter((item) => item.id !== id)
+    },
+    filterTodo (name) {
+      this.getFilter = name
+    }
+  },
+  computed: {
+    filteredList () {
+      if (this.getFilter === 'active') {
+        return this.list.filter((item) => item.isDone === false)
+      } else if (this.getFilter === 'completed') {
+        return this.list.filter((item) => item.isDone === true)
+      } else {
+        return this.list
+      }
     }
   }
 }

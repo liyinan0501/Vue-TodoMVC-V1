@@ -1,21 +1,42 @@
 <template>
   <footer class="footer">
-    <span class="todo-count">剩余<strong>数量值</strong></span>
+    <span class="todo-count"
+      ><strong>{{ count }}</strong
+      >left</span
+    >
     <ul class="filters">
-      <li>
-        <a class="selected" href="javascript:;">全部</a>
-      </li>
-      <li>
-        <a href="javascript:;">未完成</a>
-      </li>
-      <li>
-        <a href="javascript:;">已完成</a>
+      <li v-for="(item, index) in filterList" :key="index">
+        <a
+          :class="{ selected: isSelect === item }"
+          href="javascript:;"
+          @click="changFilter(item)"
+          >{{ item }}</a
+        >
       </li>
     </ul>
-    <button class="clear-completed">清除已完成</button>
+    <button class="clear-completed">Clear Completes</button>
   </footer>
 </template>
 
 <script>
-export default {}
+export default {
+  props: ['arr'],
+  computed: {
+    count () {
+      return this.arr.length
+    }
+  },
+  data () {
+    return {
+      filterList: ['all', 'active', 'completed'],
+      isSelect: 'all'
+    }
+  },
+  methods: {
+    changFilter (item) {
+      this.isSelect = item
+      this.$emit('filter', item)
+    }
+  }
+}
 </script>
