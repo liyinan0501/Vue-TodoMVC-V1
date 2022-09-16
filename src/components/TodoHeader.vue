@@ -5,7 +5,7 @@
     <label for="toggle-all"></label>
     <input
       class="new-todo"
-      placeholder="输入任务名称-回车确认"
+      placeholder="Enter"
       autofocus
       v-model="newTodo"
       @keydown.enter="addNew"
