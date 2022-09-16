@@ -14,7 +14,7 @@
         >
       </li>
     </ul>
-    <button class="clear-completed">Clear Completes</button>
+    <button class="clear-completed" @click="clearDone">Clear Completes</button>
   </footer>
 </template>
 
@@ -36,6 +36,9 @@ export default {
     changFilter (item) {
       this.isSelect = item
       this.$emit('filter', item)
+    },
+    clearDone () {
+      this.$emit('clear')
     }
   }
 }

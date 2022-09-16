@@ -2,7 +2,11 @@
   <section class="todoapp">
     <TodoHeader @create="createTodo"></TodoHeader>
     <TodoMain :arr="filteredList" @del="delTodo"></TodoMain>
-    <TodoFooter :arr="filteredList" @filter="filterTodo"></TodoFooter>
+    <TodoFooter
+      :arr="filteredList"
+      @filter="filterTodo"
+      @clear="clearTodos"
+    ></TodoFooter>
   </section>
 </template>
 
@@ -41,6 +45,9 @@ export default {
     },
     filterTodo (name) {
       this.getFilter = name
+    },
+    clearTodos () {
+      this.list = this.list.filter((item) => item.isDone !== true)
     }
   },
   computed: {
