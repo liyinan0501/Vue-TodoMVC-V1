@@ -26,11 +26,12 @@ export default {
   },
   data () {
     return {
-      list: [
-        { id: 100, name: 'LearnReact', isDone: true },
-        { id: 201, name: 'LearnVue', isDone: false },
-        { id: 103, name: 'LearnTS', isDone: true }
-      ],
+      list: JSON.parse(localStorage.getItem('VueTodoList')) || [],
+      // list: [
+      //   { id: 100, name: 'LearnReact', isDone: true },
+      //   { id: 201, name: 'LearnVue', isDone: false },
+      //   { id: 103, name: 'LearnTS', isDone: true }
+      // ],
       getFilter: 'all'
     }
   },
@@ -58,6 +59,14 @@ export default {
         return this.list.filter((item) => item.isDone === true)
       } else {
         return this.list
+      }
+    }
+  },
+  watch: {
+    list: {
+      deep: true,
+      handler () {
+        localStorage.setItem('VueTodoList', JSON.stringify(this.list))
       }
     }
   }
