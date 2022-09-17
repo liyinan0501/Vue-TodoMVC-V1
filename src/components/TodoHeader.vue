@@ -32,7 +32,10 @@ export default {
         this.arr.forEach((obj) => (obj.isDone = checked))
       },
       get () {
-        return this.arr.every((item) => item.isDone === true)
+        return (
+          this.arr.length !== 0 &&
+          this.arr.every((item) => item.isDone === true)
+        )
       }
     }
   },
