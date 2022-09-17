@@ -1,6 +1,6 @@
 <template>
   <section class="todoapp">
-    <TodoHeader @create="createTodo"></TodoHeader>
+    <TodoHeader @create="createTodo" :arr="list"></TodoHeader>
     <TodoMain :arr="filteredList" @del="delTodo"></TodoMain>
     <TodoFooter
       :arr="filteredList"
